@@ -11,6 +11,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
+
 load_dotenv()
 
 def get_vectorstore_from_url(url):
@@ -68,8 +69,8 @@ def get_response(user_input):
     return response['answer']
 
 # app config
-st.set_page_config(page_title="Chat with rCUBE's Mate's bot", page_icon="🤖")
-st.title("Chat with rCUBE's Mate's bot")
+st.set_page_config(page_title="Chat with rCUBE's Mate's Bot", page_icon="🤖")
+st.title("Chat with rCUBE's Mate's Bot")
 
 # sidebar
 with st.sidebar:
@@ -83,7 +84,7 @@ else:
     # session state
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = [
-            AIMessage(content="Hello, I am rCUBE's Mate's bot. How can I help you?"),
+            AIMessage(content="Hello, I am a bot. How can I help you?"),
         ]
     if "vector_store" not in st.session_state:
         st.session_state.vector_store = get_vectorstore_from_url(website_url)    
@@ -95,6 +96,8 @@ else:
         st.session_state.chat_history.append(HumanMessage(content=user_query))
         st.session_state.chat_history.append(AIMessage(content=response))
         
+       
+
     # conversation
     for message in st.session_state.chat_history:
         if isinstance(message, AIMessage):
